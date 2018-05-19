@@ -12,6 +12,14 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     
     private let reuseIdentifier = "ImageCell"
     private var cellWidth: CGFloat = 130
+    var document: ImageGalleryDocument?
+    
+    func saveDocument() {
+        document?.gallery = currentGallery
+        if document?.gallery != nil {
+            document?.updateChangeCount(.done)
+        }
+    }
     
     var currentGallery = ImageGallery() {
         didSet {
@@ -105,6 +113,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
             if let source = item.sourceIndexPath {
                 moveItem(at: indexPath, from: source, to: destination)
                 coordinator.drop(item.dragItem, toItemAt: destination)
+                saveDocument()
             }
             else {
                 let placeHolderContext = coordinator.drop(item.dragItem, to: UICollectionViewDropPlaceholder(insertionIndexPath: indexPath, reuseIdentifier: "PlaceholderCell"))
@@ -126,6 +135,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
                     context.commitInsertion(dataSourceUpdates: { (insertionIndexPath) in
                         let image = ImageGallery.Image(url: url.imageURL, aspectRatio: Double(localAspectRatio))
                         self.currentGallery.images.insert(image, at: insertionIndexPath.item)
+                        self.saveDocument()
                     })
                 }
                 else {
