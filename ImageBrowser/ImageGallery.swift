@@ -8,16 +8,30 @@
 
 import Foundation
 
-class ImageGallery {
+class ImageGallery: Codable {
     var name: String
     var images = [Image]()
+    
+    var json: Data? {
+        return try? JSONEncoder().encode(self)
+    }
+    
+    struct Image: Codable {
+        let url: URL
+        let aspectRatio: Double
+    }
     
     init(name: String = "New Gallery") {
         self.name = name
     }
     
-    struct Image {
-        let url: URL
-        let aspectRatio: Double
+    init?(json: Data) {
+        if let updatedValue = try? JSONDecoder().decode(ImageGallery.self, from: json) {
+            name = updatedValue.name
+            images = updatedValue.images
+        }
+        else {
+            return nil
+        }
     }
 }
