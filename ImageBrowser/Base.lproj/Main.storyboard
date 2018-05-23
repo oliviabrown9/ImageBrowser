@@ -98,7 +98,13 @@
                             <outlet property="delegate" destination="KR0-gX-zXD" id="0w5-fc-t91"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="HR6-cr-wmA"/>
+                    <navigationItem key="navigationItem" id="HR6-cr-wmA">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="St6-nr-Yd9">
+                            <connections>
+                                <action selector="CloseGallery:" destination="KR0-gX-zXD" id="thA-hT-jnS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="W8U-1a-ebE" kind="show" identifier="toImage" id="yk2-Nr-zbw"/>
                     </connections>

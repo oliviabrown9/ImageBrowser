@@ -10,6 +10,11 @@ import UIKit
 
 class ImageGalleryCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     
+    @IBAction func CloseGallery(_ sender: UIBarButtonItem) {
+        dismiss(animated: true) {
+            self.document?.close()
+        }
+    }
     private let reuseIdentifier = "ImageCell"
     private var cellWidth: CGFloat = 130
     var document: ImageGalleryDocument?

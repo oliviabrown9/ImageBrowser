@@ -12,7 +12,6 @@ import UIKit
 class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
     
     private var template: URL?
-    let templateFileName = "Untitled.imagegallery"
     let imageCacheMemoryCapacity = 100_000_000   // Worth ~100 photos or a dozen galleries.
     let imageCacheDiskCapacity = 200_000_000
     
@@ -23,17 +22,13 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         
         allowsDocumentCreation = false
         allowsPickingMultipleItems = false
-        
-        // Update the style of the UIDocumentBrowserViewController
-        // browserUserInterfaceStyle = .dark
-        // view.tintColor = .white
         if UIDevice.current.userInterfaceIdiom == .pad {
             template = try? FileManager.default.url(
                 for: .applicationSupportDirectory,
                 in: .userDomainMask,
                 appropriateFor: nil,
                 create: true
-                ).appendingPathComponent(templateFileName)
+                ).appendingPathComponent("Untitled.imagegallery")
             if template != nil {
                 allowsDocumentCreation = FileManager.default.createFile(atPath: template!.path, contents: Data())
             }
