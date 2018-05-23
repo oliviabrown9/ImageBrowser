@@ -12,8 +12,6 @@ import UIKit
 class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
     
     private var template: URL?
-    let imageCacheMemoryCapacity = 100_000_000   // Worth ~100 photos or a dozen galleries.
-    let imageCacheDiskCapacity = 200_000_000
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +31,6 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
                 allowsDocumentCreation = FileManager.default.createFile(atPath: template!.path, contents: Data())
             }
         }
-        URLCache.shared = URLCache(
-            memoryCapacity: imageCacheMemoryCapacity,
-            diskCapacity: imageCacheDiskCapacity,
-            diskPath: nil
-        )
     }
     
     
