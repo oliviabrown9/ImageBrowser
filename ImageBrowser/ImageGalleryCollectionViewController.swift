@@ -10,8 +10,8 @@ import UIKit
 
 class ImageGalleryCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     
-    // Set thumbnail to first image and close gallery
-    @IBAction func closeGallery(_ sender: UIBarButtonItem) {
+    // Set thumbnail to first image extra credit
+    @IBAction private func closeGallery(_ sender: UIBarButtonItem) {
         setThumbnail()
         dismiss(animated: true) {
             self.document?.close()

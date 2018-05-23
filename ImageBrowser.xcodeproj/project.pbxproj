@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		75900D6A20B0AC7500A9EFCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75900D6920B0AC7500A9EFCF /* AppDelegate.swift */; };
 		75900D6C20B0AC7500A9EFCF /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75900D6B20B0AC7500A9EFCF /* DocumentBrowserViewController.swift */; };
-		75900D7020B0AC7500A9EFCF /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75900D6F20B0AC7500A9EFCF /* Document.swift */; };
+		75900D7020B0AC7500A9EFCF /* ImageGalleryDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75900D6F20B0AC7500A9EFCF /* ImageGalleryDocument.swift */; };
 		75900D7320B0AC7500A9EFCF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75900D7120B0AC7500A9EFCF /* Main.storyboard */; };
 		75900D7520B0AC7600A9EFCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75900D7420B0AC7600A9EFCF /* Assets.xcassets */; };
 		75900D7820B0AC7600A9EFCF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75900D7620B0AC7600A9EFCF /* LaunchScreen.storyboard */; };
@@ -24,7 +24,7 @@
 		75900D6620B0AC7500A9EFCF /* ImageBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75900D6920B0AC7500A9EFCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75900D6B20B0AC7500A9EFCF /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
-		75900D6F20B0AC7500A9EFCF /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		75900D6F20B0AC7500A9EFCF /* ImageGalleryDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryDocument.swift; sourceTree = "<group>"; };
 		75900D7220B0AC7500A9EFCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		75900D7420B0AC7600A9EFCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75900D7720B0AC7600A9EFCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 			children = (
 				75900D8F20B0AEB900A9EFCF /* Supporting Files */,
 				75900D6B20B0AC7500A9EFCF /* DocumentBrowserViewController.swift */,
-				75900D6F20B0AC7500A9EFCF /* Document.swift */,
+				75900D6F20B0AC7500A9EFCF /* ImageGalleryDocument.swift */,
 				75900D7120B0AC7500A9EFCF /* Main.storyboard */,
 				75900D7920B0AC7600A9EFCF /* Info.plist */,
 				75900D8120B0ADBC00A9EFCF /* ImageGalleryCollectionViewController.swift */,
@@ -164,7 +164,7 @@
 				75900D8420B0ADD700A9EFCF /* ImageGallery.swift in Sources */,
 				75900D8E20B0AEA400A9EFCF /* ImageViewController.swift in Sources */,
 				75900D8220B0ADBC00A9EFCF /* ImageGalleryCollectionViewController.swift in Sources */,
-				75900D7020B0AC7500A9EFCF /* Document.swift in Sources */,
+				75900D7020B0AC7500A9EFCF /* ImageGalleryDocument.swift in Sources */,
 				75900D8A20B0AE3200A9EFCF /* ImageCollectionViewCell.swift in Sources */,
 				75900D6C20B0AC7500A9EFCF /* DocumentBrowserViewController.swift in Sources */,
 				75900D8C20B0AE5000A9EFCF /* Utilities.swift in Sources */,

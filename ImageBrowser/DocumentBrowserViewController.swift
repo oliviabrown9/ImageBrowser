@@ -15,9 +15,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         delegate = self
-        
         allowsDocumentCreation = false
         allowsPickingMultipleItems = false
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -34,7 +32,6 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     }
     
     // MARK: UIDocumentBrowserViewControllerDelegate
-    
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
         importHandler(template, .copy)
     }
