@@ -20,10 +20,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         allowsPickingMultipleItems = false
         if UIDevice.current.userInterfaceIdiom == .pad {
             template = try? FileManager.default.url(
-                for: .applicationSupportDirectory,
-                in: .userDomainMask,
-                appropriateFor: nil,
-                create: true
+                for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true
                 ).appendingPathComponent("Untitled.imagegallery")
             if template != nil {
                 allowsDocumentCreation = FileManager.default.createFile(atPath: template!.path, contents: Data())
