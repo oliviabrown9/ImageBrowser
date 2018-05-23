@@ -57,6 +57,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView?.dragInteractionEnabled = true
         collectionView?.dragDelegate = self
         collectionView?.dropDelegate = self
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(scaleCellWidth))
