@@ -10,11 +10,26 @@ import UIKit
 
 class ImageGalleryCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     
+    // Set thumbnail to first image and close gallery
     @IBAction func closeGallery(_ sender: UIBarButtonItem) {
+        setThumbnail()
         dismiss(animated: true) {
             self.document?.close()
         }
     }
+    
+    private func setThumbnail() {
+        if let imageUrl = imageInfo.first?.url.imageURL {
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                if let data = try? Data(contentsOf: imageUrl) {
+                    DispatchQueue.main.async {
+                        self?.document?.thumbnail = UIImage(data: data)
+                    }
+                }
+            }
+        }
+    }
+
     private let reuseIdentifier = "ImageCell"
     private var cellWidth: CGFloat = 130
     var document: ImageGalleryDocument?
@@ -22,10 +37,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     var currentGallery: ImageGallery? {
         get {
             let images = imageInfo.map { image in
-                ImageGallery.Image(
-                    url: image.url,
-                    aspectRatio: Double(image.aspectRatio)
-                )
+                ImageGallery.Image(url: image.url, aspectRatio: Double(image.aspectRatio))
             }
             return ImageGallery(images: images)
         }
@@ -170,8 +182,6 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
             }
         })
     }
-    
-    private typealias ImageData = (url: URL, aspectRatio: CGFloat)
     
     private func move(item: UICollectionViewDropItem, from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         collectionView?.performBatchUpdates({
