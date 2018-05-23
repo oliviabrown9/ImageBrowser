@@ -10,6 +10,9 @@ import UIKit
 
 class ImageGalleryDocument: UIDocument {
     
+    let templateFileName = "Untitled"
+    let fileExtension = ".gallery"
+    
     var gallery: ImageGallery?
     
     override func contents(forType typeName: String) throws -> Any {
@@ -22,4 +25,6 @@ class ImageGalleryDocument: UIDocument {
         }
     }
 }
+
+
 
