@@ -170,13 +170,13 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         })
     }
     
+    private typealias ImageData = (url: URL, aspectRatio: CGFloat)
+    
     private func move(item: UICollectionViewDropItem, from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         collectionView?.performBatchUpdates({
-            if let selectedImage = (item.dragItem.localObject as? (IndexPath, (url: URL, aspectRatio: CGFloat)))?.1 {
-                imageInfo.remove(at: sourceIndexPath.item)
-                imageInfo.insert(selectedImage, at: destinationIndexPath.item)
-                collectionView?.moveItem(at: sourceIndexPath, to: destinationIndexPath)
-            }
+            let selectedImage = imageInfo.remove(at: sourceIndexPath.item)
+            imageInfo.insert(selectedImage, at: destinationIndexPath.item)
+            collectionView?.moveItem(at: sourceIndexPath, to: destinationIndexPath)
         })
     }
     
