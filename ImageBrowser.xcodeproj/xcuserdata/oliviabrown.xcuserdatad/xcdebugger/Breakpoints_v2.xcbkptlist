@@ -2,4 +2,70 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImageBrowser/ImageGalleryCollectionViewController.swift"
+            timestampString = "548756574.8764811"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "imageInfo"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImageBrowser/ImageGalleryCollectionViewController.swift"
+            timestampString = "548756574.876878"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "currentGallery"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageBrowser.ImageGalleryCollectionViewController.currentGallery.setter : Swift.Optional&lt;ImageBrowser.ImageGallery&gt;"
+                  moduleName = "ImageBrowser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oliviabrown/Desktop/ImageBrowser/ImageBrowser/ImageGalleryCollectionViewController.swift"
+                  timestampString = "548756091.705189"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ImageBrowser.ImageGallery.Image) -&gt; (Foundation.URL, CoreGraphics.CGFloat) in ImageBrowser.ImageGalleryCollectionViewController.currentGallery.setter : Swift.Optional&lt;ImageBrowser.ImageGallery&gt;"
+                  moduleName = "ImageBrowser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oliviabrown/Desktop/ImageBrowser/ImageBrowser/ImageGalleryCollectionViewController.swift"
+                  timestampString = "548756091.708181"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

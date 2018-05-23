@@ -21,8 +21,9 @@ class ImageGallery: Codable {
         let aspectRatio: Double
     }
     
-    init(name: String = "New Gallery") {
+    init(name: String = "New Gallery", images: [Image] = [Image]()) {
         self.name = name
+        self.images = images
     }
     
     init?(json: Data) {

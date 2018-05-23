@@ -10,7 +10,7 @@ import UIKit
 
 class ImageGalleryCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     
-    @IBAction func CloseGallery(_ sender: UIBarButtonItem) {
+    @IBAction func closeGallery(_ sender: UIBarButtonItem) {
         dismiss(animated: true) {
             self.document?.close()
         }
@@ -19,16 +19,39 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     private var cellWidth: CGFloat = 130
     var document: ImageGalleryDocument?
     
-    func saveDocument() {
-        document?.gallery = currentGallery
-        if document?.gallery != nil {
-            document?.updateChangeCount(.done)
+    var currentGallery: ImageGallery? {
+        get {
+            let images = imageInfo.map { image in
+                ImageGallery.Image(
+                    url: image.url,
+                    aspectRatio: Double(image.aspectRatio)
+                )
+            }
+            return ImageGallery(images: images)
+        }
+        set {
+            imageInfo = newValue?.images.map { ($0.url, CGFloat($0.aspectRatio)) } ?? []
+            collectionView?.reloadData()
         }
     }
     
-    var currentGallery = ImageGallery() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if document?.documentState == .closed {
+            document?.open { [weak self] success in
+                if success {
+                    self?.title = self?.document?.localizedName
+                    self?.currentGallery = self?.document?.gallery
+                }
+            }
+        }
+    }
+    
+    
+    private var imageInfo = [(url: URL, aspectRatio: CGFloat)]() {
         didSet {
-            collectionView?.reloadData()
+            document?.gallery = currentGallery
+            document?.updateChangeCount(.done)
         }
     }
     
@@ -43,7 +66,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let imageVC = segue.destination as? ImageViewController, let indexPath = sender as? IndexPath {
-            imageVC.imageUrl = currentGallery.images[indexPath.item].url
+            imageVC.imageUrl = imageInfo[indexPath.item].url
         }
     }
     
@@ -53,13 +76,13 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentGallery.images.count
+        return imageInfo.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         if let imageCell = cell as? ImageCollectionViewCell {
-            imageCell.imageUrl = currentGallery.images[indexPath.item].url
+            imageCell.imageUrl = imageInfo[indexPath.item].url
         }
         return cell
     }
@@ -70,7 +93,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let imageAspectRatio = currentGallery.images[indexPath.item].aspectRatio
+        let imageAspectRatio = imageInfo[indexPath.item].aspectRatio
         return CGSize(width: cellWidth, height: cellWidth * CGFloat(imageAspectRatio))
     }
     
@@ -116,9 +139,8 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
             let destination = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
             let indexPath = IndexPath(item: destination.item + index, section: destination.section)
             if let source = item.sourceIndexPath {
-                moveItem(at: indexPath, from: source, to: destination)
+                move(item: item, from: source, to: destination)
                 coordinator.drop(item.dragItem, toItemAt: destination)
-                saveDocument()
             }
             else {
                 let placeHolderContext = coordinator.drop(item.dragItem, to: UICollectionViewDropPlaceholder(insertionIndexPath: indexPath, reuseIdentifier: "PlaceholderCell"))
@@ -138,9 +160,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
             DispatchQueue.main.async {
                 if let url = provider, let localAspectRatio = aspectRatio {
                     context.commitInsertion(dataSourceUpdates: { (insertionIndexPath) in
-                        let image = ImageGallery.Image(url: url.imageURL, aspectRatio: Double(localAspectRatio))
-                        self.currentGallery.images.insert(image, at: insertionIndexPath.item)
-                        self.saveDocument()
+                        self.imageInfo.insert((url.imageURL, CGFloat(localAspectRatio)), at: insertionIndexPath.item)
                     })
                 }
                 else {
@@ -150,11 +170,13 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         })
     }
     
-    private func moveItem(at indexPath: IndexPath, from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    private func move(item: UICollectionViewDropItem, from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         collectionView?.performBatchUpdates({
-            let selectedImage = currentGallery.images.remove(at: sourceIndexPath.item)
-            currentGallery.images.insert(selectedImage, at: indexPath.item)
-            collectionView?.moveItem(at: sourceIndexPath, to: destinationIndexPath)
+            if let selectedImage = (item.dragItem.localObject as? (IndexPath, (url: URL, aspectRatio: CGFloat)))?.1 {
+                imageInfo.remove(at: sourceIndexPath.item)
+                imageInfo.insert(selectedImage, at: destinationIndexPath.item)
+                collectionView?.moveItem(at: sourceIndexPath, to: destinationIndexPath)
+            }
         })
     }
     

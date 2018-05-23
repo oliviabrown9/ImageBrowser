@@ -101,7 +101,7 @@
                     <navigationItem key="navigationItem" id="HR6-cr-wmA">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="St6-nr-Yd9">
                             <connections>
-                                <action selector="CloseGallery:" destination="KR0-gX-zXD" id="thA-hT-jnS"/>
+                                <action selector="closeGallery:" destination="KR0-gX-zXD" id="thA-hT-jnS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
